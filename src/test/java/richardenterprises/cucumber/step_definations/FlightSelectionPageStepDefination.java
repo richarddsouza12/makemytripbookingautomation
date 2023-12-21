@@ -1,5 +1,6 @@
 package richardenterprises.cucumber.step_definations;
 
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import richardenterprises.cucumber.StepDefinationContextSession;
 import richardenterprises.page_objects.FlightSelectionPage;
@@ -20,8 +21,12 @@ public class FlightSelectionPageStepDefination {
 
         FlightSelectionPage flightSelectionPage = new FlightSelectionPage( this.SDSess.baseTest.driver );
         flightSelectionPage.selectCheapestFlightByName( flightname );
-
         this.switchHandleToTravelersDetailsPage();
+    }
+
+    @Then("Shows listing of listing of flights available")
+    public void shows_listing_of_listing_of_flights_available(){
+        //dummy function for readibility
     }
 
     private void switchHandleToTravelersDetailsPage() {

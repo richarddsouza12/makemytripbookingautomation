@@ -31,7 +31,9 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
-cucumber_reports/
+cucumber_reports/*
+
+test-ng-reports/*
 
 ### VS Code ###
 .vscode/

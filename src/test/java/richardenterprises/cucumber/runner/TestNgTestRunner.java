@@ -8,7 +8,8 @@ import org.testng.annotations.DataProvider;
         glue = "richardenterprises.cucumber.step_definations",
         monochrome = true,
         plugin = {
-                "html:cucumber_reports/default_cucumber_report/cucumber.html"
+                "html:cucumber_reports/default_cucumber_report/cucumber.html",
+                "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"
 })
 public class TestNgTestRunner extends AbstractTestNGCucumberTests {
 

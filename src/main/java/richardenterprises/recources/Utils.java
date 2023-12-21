@@ -23,14 +23,12 @@ public class Utils {
     public void removeWebElementIfPresent( WebElement webElement ) {
 
         if( webElement != null ) {
-
             //send js to remove it.
             JavascriptExecutor jse_jse = ( JavascriptExecutor ) this.driver;
             String javascript = "arguments[0].remove();";
             jse_jse.executeScript( javascript, webElement );
 
         }
-
     }
 
 

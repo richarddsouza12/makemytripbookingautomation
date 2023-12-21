@@ -60,7 +60,6 @@ public class LandingPage {
         Thread.sleep(400);
         this.driver.findElement(By.cssSelector("div.datePickerContainer div.DayPicker-Months div.DayPicker-Day--selected") ).click();
         Thread.sleep(700);
-        this.driver.findElement(By.cssSelector("a.widgetSearchBtn") ).click();
 
         //using implicit wait.
         //we cant change the implicit wait again to 15 seconds as its set once.
@@ -73,6 +72,10 @@ public class LandingPage {
         //used explicit wait
 
 
+    }
+
+    public void clickSearchButton() {
+        this.driver.findElement(By.cssSelector("a.widgetSearchBtn") ).click();
     }
 
     private void checkForLoginPopupAndCloseIt() {

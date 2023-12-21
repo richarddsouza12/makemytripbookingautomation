@@ -29,6 +29,7 @@ public class LandingPageStepDefination {
 
         LandingPage landingPage = new LandingPage( this.SDSess.baseTest.driver );
         landingPage.fillSeachDeatisforFilghtsToday( placeFrom, placeTo );
+        landingPage.clickSearchButton();
 
         //long wait ~10 -12 seconds for page load. //wiat until the fights listings is complete.
         //Thread.sleep(15000); //old approach
@@ -36,11 +37,21 @@ public class LandingPageStepDefination {
         wdw.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='listing-id']")));
     }
 
+
+    @Given("Fill flight travel related details and date details")
+    public void fill_flight_travel_related_details_and_date_details() throws InterruptedException {
+        LandingPage landingPage = new LandingPage( this.SDSess.baseTest.driver );
+        landingPage.fillSeachDeatisforFilghtsToday( "goa", "pune" );
+        Assert.assertTrue( false );
+    }
+
     @Then("Final confirmation page displays before it proceeds to payment")
     public void final_confirmation_page_displays_before_it_proceeds_to_payment() {
         // Write code here that turns the phrase above into concrete actions
         Assert.assertTrue( true );
     }
+
+
 
 
 

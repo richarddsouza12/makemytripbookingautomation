@@ -27,7 +27,7 @@ public class FlightBookingTest extends BaseTest {
      * Test booking of a one way form Goa to Pune.
      * @throws Exception
      */
-    @Test
+    @Test(enabled = false)
     public void testBookGoaToPuneOneWayFlight() throws Exception {
 
         this.driver.get("https://www.makemytrip.com/");
@@ -41,6 +41,7 @@ public class FlightBookingTest extends BaseTest {
         LandingPage landingPage = new LandingPage( this.driver );
         //landingPage.login( username, password );
         landingPage.fillSeachDeatisforFilghtsToday( fromPlace, toPlace );
+        landingPage.clickSearchButton();
 
         //long wait ~10 -12 seconds for page load. //wiat until the fights listings is complete.
         //Thread.sleep(15000); //old approach
@@ -64,6 +65,20 @@ public class FlightBookingTest extends BaseTest {
 
     }
 
+    @Test
+    public void testEnterFlightSearchDetailsAndForcefullyFail() throws Exception {
+
+        String fromPlace = "goa";
+        String toPlace = "pune";
+
+        this.driver.get("https://www.makemytrip.com/");
+        LandingPage landingPage = new LandingPage( this.driver );
+        landingPage.fillSeachDeatisforFilghtsToday( fromPlace, toPlace );
+        Assert.assertTrue(false );
+
+    }
+
+
     private void switchHandleToTravelersDetailsPage() {
 
         Set<String> windowHandles = this.driver.getWindowHandles();
@@ -71,14 +86,6 @@ public class FlightBookingTest extends BaseTest {
         String parentWindowId = iteratorSetWindowHandles.next();
         String childWindowId = iteratorSetWindowHandles.next();
         driver.switchTo().window( childWindowId );
-
-    }
-
-    @Test
-    public void test1() throws InterruptedException {
-
-        this.driver.get("https://www.makemytrip.com/");
-        LandingPage landingPage = new LandingPage( this.driver );
 
     }
 
