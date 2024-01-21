@@ -54,7 +54,7 @@ public class FlightSelectionPage {
         for ( WebElement wb_fare_category : list_wb_fare_categories )  {
 
             String fareTypeName = wb_fare_category.findElement( By.cssSelector("p.fareNameHead") ).getText();
-            if( fareTypeName.equalsIgnoreCase(FareTypeComfort) ) {
+            if( fareTypeName.toLowerCase().contains(FareTypeComfort) ) {
 
                 wb_fare_category.findElement( By.xpath(".//button[contains( text(),'Book Now')]")).click();
                 System.out.println("fare type comfort found and clicked.");

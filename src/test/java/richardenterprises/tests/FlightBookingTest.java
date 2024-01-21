@@ -27,7 +27,7 @@ public class FlightBookingTest extends BaseTest {
      * Test booking of a one way form Goa to Pune.
      * @throws Exception
      */
-    @Test(enabled = false)
+    @Test
     public void testBookGoaToPuneOneWayFlight() throws Exception {
 
         this.driver.get("https://www.makemytrip.com/");
@@ -51,6 +51,7 @@ public class FlightBookingTest extends BaseTest {
         FlightSelectionPage flightSelectionPage = new FlightSelectionPage( this.driver );
         flightSelectionPage.selectCheapestFlightByName( flightname );
 
+        //flow dosent open up new tab now as earlier.
         this.switchHandleToTravelersDetailsPage();
 
         TravellersDetailsPage travellersDetailsPage = new TravellersDetailsPage( this.driver );
@@ -88,5 +89,7 @@ public class FlightBookingTest extends BaseTest {
         driver.switchTo().window( childWindowId );
 
     }
+
+    //xx
 
 }

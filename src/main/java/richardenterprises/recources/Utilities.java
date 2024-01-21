@@ -10,13 +10,14 @@ import java.io.IOException;
 
 public class Utilities {
 
-    public String getScreenshot( String testCaseName, WebDriver driver ) throws IOException {
+    public String getScreenshot( String testCaseName, String dateTimeStamp,  WebDriver driver ) throws IOException {
 
         TakesScreenshot takesScreenshot = (TakesScreenshot) driver;
-        File source = takesScreenshot.getScreenshotAs(OutputType.FILE);
-        File file = new File(System.getProperty("user.dir") + "/test-ng-reports//" + testCaseName + ".png");
-        FileUtils.copyFile(source, file);
-        return System.getProperty("user.dir") + "/test-ng-reports/" + testCaseName + ".png";
+        File source = takesScreenshot.getScreenshotAs( OutputType.FILE );
+        String destinationFilePath = System.getProperty("user.dir") + "/test-ng-reports/" + dateTimeStamp + "/" + testCaseName + ".png";
+        File destFile = new File(destinationFilePath);
+        FileUtils.copyFile(source, destFile);
+        return destinationFilePath;
 
     }
 

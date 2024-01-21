@@ -11,13 +11,28 @@ import richardenterprises.recources.ExtentReporterterNg;
 import richardenterprises.recources.Utilities;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Listeners implements ITestListener {
 
-    public ExtentReports extentReports = ExtentReporterterNg.getReportObject();
+    public String currentDateTimestamp;
+    public ExtentReports extentReports;
     public ExtentTest test;
     public WebDriver webDriver;
     private static ThreadLocal<WebDriver> webDriverThreadLocal = new ThreadLocal<>();
+
+    public Listeners() {
+        this.extentReports = ExtentReporterterNg.getReportObject( this.getCurrentDateTimeStamp() );
+    }
+
+    private String getCurrentDateTimeStamp() {
+
+        if( this.currentDateTimestamp == null ) {
+            this.currentDateTimestamp =  new SimpleDateFormat("dd-MM-yyyy-HH-mm-ss").format(new Date());
+        }
+        return this.currentDateTimestamp;
+    }
 
     //called for each method test start.
     @Override
@@ -35,7 +50,7 @@ public class Listeners implements ITestListener {
         test.log( Status.PASS,"Test passed"); //logging of entent reporter.
         this.webDriver = this.getWebDriverInstance( result );
         if( this.webDriver != null ) {
-            this.webDriver.quit();
+            //this.webDriver.quit();
         }
     }
 
@@ -76,13 +91,13 @@ public class Listeners implements ITestListener {
         //take Screenshot.
         if( driver != null ) {  //added this condition due to non selenium test cases only.
             try {
-                screenshotPath = utilities.getScreenshot( result.getMethod().getMethodName(), driver );
+                screenshotPath = utilities.getScreenshot( result.getMethod().getMethodName(), this.getCurrentDateTimeStamp() , driver );
                 test.addScreenCaptureFromPath( screenshotPath );
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
 
-            driver.quit();
+            //driver.quit();
         }
     }
 
@@ -125,4 +140,6 @@ public class Listeners implements ITestListener {
         return webDriver;
 
     }
+
+    //mm
 }
