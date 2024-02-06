@@ -23,13 +23,15 @@ public class TravellersDetailsPage {
 
         webDriverWaitExplicit = new WebDriverWait( this.driver, Duration.ofSeconds(5) );
 
+        //handle - Your Selection Has Been Changed From Comfort|Comfort Plus to Comfort Plus|Comfort Popup click continue if present.
+        handleFlightTypeChangePopup();
+
         Thread.sleep(300 );
         WebElement wb_insuranceSection = driver.findElement(By.id("INSURANCE") );
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", wb_insuranceSection);
         Thread.sleep(1000);
 
         driver.findElement( By.xpath("(//div[@id='INSURANCE' and contains(@class,'oneCard-element')]//input[@type='radio'])[2]") ).click();
-
 
         //Fill Details :
         Thread.sleep(300 );
@@ -44,7 +46,6 @@ public class TravellersDetailsPage {
         driver.findElement( By.xpath("(//div[@id='wrapper_ADULT']//input[@type='text'])[2]") ).sendKeys("Dsouza");
         driver.findElement( By.xpath("//div[@id='wrapper_ADULT']//div[contains(@class,'selectTab')]//label[1]") ).click();
 
-
         //add contact
         Thread.sleep(300 );
         WebElement wb_contact_details = driver.findElement(By.id("contactDetails") );
@@ -54,7 +55,6 @@ public class TravellersDetailsPage {
         driver.findElement( By.xpath("(//div[@id='contactDetails']//input)[2]") ).sendKeys("8806637533");
         driver.findElement( By.xpath("(//div[@id='contactDetails']//input)[3]") ).sendKeys("richarddsouza@gmail.com");
 
-
         //Billing Address
         driver.findElement( By.xpath("(//div[@id='BILLING_ADDRESS']//input[@type='text'])[1]") ).clear();
         driver.findElement( By.xpath("(//div[@id='BILLING_ADDRESS']//input[@type='text'])[1]") ).sendKeys("403517");
@@ -63,7 +63,6 @@ public class TravellersDetailsPage {
         //Some TransparentOvelralyDiv show up for a while here.wait till it goes.
         WebElement p_overlay = this.driver.findElement(By.cssSelector("p.transparentOverlay"));
         Utils.getOrCreateUtilsInstance( this.driver ).removeWebElementIfPresent( p_overlay );
-
 
         driver.findElement( By.xpath("(//div[@id='BILLING_ADDRESS']//input[@type='text'])[2]") ).click();
         Thread.sleep(600 );
@@ -87,5 +86,19 @@ public class TravellersDetailsPage {
         Thread.sleep(700);
         driver.findElement( By.xpath("//div[@class='overlay']//button[contains(text(),'CONFIRM')]") ).click();
 
+    }
+
+    private void handleFlightTypeChangePopup() {
+
+        try{
+            By by_flight_change_confirmation_popup = By.xpath("//div[contains(@class,'commonOverlay')]");
+            webDriverWaitExplicit.until(ExpectedConditions.visibilityOfElementLocated(by_flight_change_confirmation_popup));
+            WebElement wb_flight_change_confirmation_popup = driver.findElement(by_flight_change_confirmation_popup);
+            Thread.sleep(1000);
+            wb_flight_change_confirmation_popup.findElement(By.xpath(".//button[@type='DISMISS']")).click();
+        } catch ( Exception e ) {
+            //no popup showed.
+            System.out.println( " Popup add not found : skipping"  );
+        }
     }
 }

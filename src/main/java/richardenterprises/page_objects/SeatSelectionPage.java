@@ -21,7 +21,11 @@ public class SeatSelectionPage {
     }
 
     public void performSeatSelection() throws Exception {
+
         webDriverWaitExplicit = new WebDriverWait( this.driver, Duration.ofSeconds(5) );
+
+        //popup at side to select seat offer - skip it
+        handleSeatBookingSuggestionPopup();
 
         //check how many connecting flights?
         WebElement div = driver.findElement( By.xpath("//div[@id='SEATS_N_MEALS']//div[@class='ancillaryScrollWrap']") );
@@ -30,8 +34,15 @@ public class SeatSelectionPage {
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", div);
         Thread.sleep(1000);
 
+        int i = 1;
         List <WebElement> wb_filght_seat_picker_cards = driver.findElements( By.xpath(" //div[@id='SEATS_N_MEALS']//div[@class='ancillaryScrollWrap']/div") );
         for( WebElement wb_filght_seat_picker_card : wb_filght_seat_picker_cards ) {
+
+            //skip this for first round - already handled on this page load
+            if( i != 1 ) {
+                //popup at side to select seat offer - skip it
+                handleSeatBookingSuggestionPopup();
+            }
 
             //wait for seat selection , seat header section to be fully visible after scroll
             webDriverWaitExplicit.until(ExpectedConditions.visibilityOf( wb_filght_seat_picker_card.findElement(
@@ -57,7 +68,6 @@ public class SeatSelectionPage {
             }
 
             //click the next button >  if its present
-
             if( this.isNextFlightSeatSelectionSetionPresent() ) {
                 Thread.sleep(1000);
                 this.moveToNextFlightSeatSelectionSection();
@@ -67,10 +77,24 @@ public class SeatSelectionPage {
                 driver.findElement( By.xpath("//form[@id='mainSection_1']/div[2]//button[contains(text(),'Continue')]") ).click();
             }
 
+            i++;
         }
 
         // redirects to payment page form here if I click next again
 
+    }
+
+    private void handleSeatBookingSuggestionPopup() {
+        try{
+            By by_seat_booking_suggestion_offer_popup = By.xpath("//div[contains(@class,'seatBookOverlayWrap')]");
+            webDriverWaitExplicit.until(ExpectedConditions.visibilityOfElementLocated(by_seat_booking_suggestion_offer_popup));
+            WebElement wb_seat_booking_suggestion_offer_popup = driver.findElement(by_seat_booking_suggestion_offer_popup);
+            Thread.sleep(1000);
+            wb_seat_booking_suggestion_offer_popup.findElement(By.xpath(".//p[contains(@class,'seatBookingOverlayCta')]//span")).click();
+        } catch ( Exception e ) {
+            //no popup showed.
+            System.out.println( " Popup seat_booking_suggestion_offer_popup not found : skipping"  );
+        }
     }
 
     private void moveToNextFlightSeatSelectionSection() {

@@ -41,7 +41,7 @@ public class LandingPage {
         this.driver.findElement(By.cssSelector("div.autoSuggestPlugin input[type='text']") ).click();
         Thread.sleep(700);
         this.driver.findElement(By.cssSelector("div.autoSuggestPlugin input[type='text']") ).sendKeys(fromPlace);
-        Thread.sleep(700);
+        Thread.sleep(1000);
         //clcik selection for dropdown
         this.driver.findElement( By.cssSelector("div.autoSuggestPlugin div[id='react-autowhatever-1'] ul.react-autosuggest__suggestions-list li:nth-child(1)") ).click();
 
@@ -49,7 +49,7 @@ public class LandingPage {
         this.driver.findElement(By.xpath("//label[@for='toCity']") ).click();
         Thread.sleep(700);
         this.driver.findElement(By.cssSelector("div.searchToCity input#toCity") ).sendKeys(toPlace);
-        Thread.sleep(700);
+        Thread.sleep(1000);
         this.driver.findElement(By.cssSelector("div.searchToCity div.autoSuggestPlugin ul[role='listbox'] li:nth-child(1)") ).click();
 
         Thread.sleep(400);

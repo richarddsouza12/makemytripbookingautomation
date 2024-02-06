@@ -1,5 +1,6 @@
 package richardenterprises.page_objects;
 
+import io.cucumber.java.en.Then;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -31,7 +32,9 @@ public class FlightSelectionPage {
         //end - check if add and close it.
         Thread.sleep( 1000 );
 
+        //logic here.
 
+        //Loop through and Find Listing Cards.
         List<WebElement> list_wb_allFlightCards = this.driver.findElements( By.cssSelector("div.clusterContent div.listingCard") );
         WebElement wb_matchedFlightCard = null;
 
@@ -50,6 +53,21 @@ public class FlightSelectionPage {
         wb_matchedFlightCard.findElement( By.xpath(".//button[contains(@class,'ViewFareBtn')]") ).click();
         Thread.sleep(700);
 
+        //Flight Fare Window popup appears with   types of flights eg comfort , comfort + ,etc.
+        //choose first one.
+
+        By by_flight_fares_popup = By.xpath("//div[contains(@class,'fareFamilyPopupWrapper')]");
+        webDriverWaitExplicit.until( ExpectedConditions.visibilityOfElementLocated( by_flight_fares_popup ) );
+        WebElement wb_flight_fares_popup = driver.findElement( by_flight_fares_popup );
+        List<WebElement> list_wb_fare_categories = wb_flight_fares_popup.findElements( By.xpath(".//div[contains(@class,'fareFamilyCardWrapper')]"));
+        WebElement wb_first_flight_category_card =  list_wb_fare_categories.iterator().next();
+        Thread.sleep( 1000 );
+        wb_first_flight_category_card.findElement(By.xpath(".//div[contains(@class,'ffCardFooter')]//*[@type='button' and text()='BOOK NOW']")).click();
+
+
+        /*
+        Old Fare Price Logic where the types of flights eg comfort , comfort + , etc used to come under the booking only. Discontinued.
+
         List<WebElement> list_wb_fare_categories = wb_matchedFlightCard.findElements(By.xpath("./parent::div//div[contains(@class,'viewFaresOuter')]//div[@class='viewFareRowWrap']"));
         for ( WebElement wb_fare_category : list_wb_fare_categories )  {
 
@@ -61,6 +79,8 @@ public class FlightSelectionPage {
             }
 
         }
+
+        */
 
     }
 }
