@@ -42,4 +42,30 @@ public class Utils {
         jsExecutor.executeScript( script, element);
     }
 
+    public boolean findStringInAllWindowHandles( String targetString ) {
+
+        // Get all window handles
+        boolean found = false;
+
+        int i = 1;
+        String main_window_handle = "";
+        for (String windowHandle : driver.getWindowHandles()) {
+            if( i==1) {
+                main_window_handle = windowHandle;
+            }
+            // Switch to the window
+            driver.switchTo().window(windowHandle);
+            // Get the current window's URL
+            String currentURL = driver.getCurrentUrl();
+            // Check if the URL contains the target string
+            if (currentURL.contains(targetString)) {
+                found = true;
+                break;
+            }
+            i++;
+        }
+        driver.switchTo().window(main_window_handle);
+        return found;
+    }
+
 }

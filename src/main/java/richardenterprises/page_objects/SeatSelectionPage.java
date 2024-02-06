@@ -30,7 +30,7 @@ public class SeatSelectionPage {
         //check how many connecting flights?
         WebElement div = driver.findElement( By.xpath("//div[@id='SEATS_N_MEALS']//div[@class='ancillaryScrollWrap']") );
 
-        Thread.sleep(300 );
+        Thread.sleep(1000 );
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", div);
         Thread.sleep(1000);
 
