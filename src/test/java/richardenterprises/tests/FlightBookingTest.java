@@ -66,7 +66,7 @@ public class FlightBookingTest extends BaseTest {
 
     }
 
-    @Test(enabled = false)
+    @Test
     public void testEnterFlightSearchDetailsAndForcefullyFail() throws Exception {
 
         String fromPlace = "goa";
