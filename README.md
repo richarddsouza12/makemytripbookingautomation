@@ -1,5 +1,9 @@
 # Makemytrip booking automation
 
+**See video of automation in this project itself**
+```sh
+PATH : /Test NG Automation Video On 06-02-24 04:33 PM IST.webm
+```
 **TestNg Framework Commands**
 ```sh
 mvn test -PRegression-All-Tests
