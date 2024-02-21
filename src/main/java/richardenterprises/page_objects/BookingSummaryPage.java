@@ -9,6 +9,7 @@ public class BookingSummaryPage {
 
     public WebDriver driver;
     public WebDriverWait webDriverWaitExplicit;
+    public final By byProceedToPayButton = By.xpath("//*[@id='ACKNOWLEDGE_SECTION']//button");
 
     public BookingSummaryPage( WebDriver driver ){
         this.driver = driver;
@@ -16,7 +17,7 @@ public class BookingSummaryPage {
 
     public boolean checkIfProceedToPayButtonIsPresent() {
         try {
-            driver.findElement( By.xpath("//*[@id='ACKNOWLEDGE_SECTION']//button") );
+            driver.findElement(byProceedToPayButton);
             return true;
         } catch ( Exception e ) {
             return false;
