@@ -50,7 +50,7 @@ public class TravellersDetailsPage {
 
         Thread.sleep(300 );
         WebElement wb_insuranceSection = driver.findElement( By.id("INSURANCE") );
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", wb_insuranceSection);
+        Utils.getOrCreateUtilsInstance(driver).scrollToElement( wb_insuranceSection );
         Thread.sleep(1000);
 
         //dont want insurance.
@@ -59,7 +59,7 @@ public class TravellersDetailsPage {
         //Fill Details :
         Thread.sleep(300 );
         WebElement wb_travelers_details = driver.findElement(By.id("TRAVELLER_DETAIL") );
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", wb_travelers_details);
+        Utils.getOrCreateUtilsInstance(driver).scrollToElement( wb_travelers_details );
         Thread.sleep(700);
 
         driver.findElement( byButtonAddTraveller ).click();
@@ -72,7 +72,7 @@ public class TravellersDetailsPage {
         //add contact
         Thread.sleep(300 );
         WebElement wb_contact_details = driver.findElement( By.id("contactDetails") );
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", wb_contact_details);
+        Utils.getOrCreateUtilsInstance(driver).scrollToElement( wb_contact_details );
         Thread.sleep(700);
 
         driver.findElement(byContactNo).sendKeys("8806637533");
@@ -90,18 +90,15 @@ public class TravellersDetailsPage {
         driver.findElement( By.xpath("(//div[@id='BILLING_ADDRESS']//input[@type='text'])[2]") ).click();
         Thread.sleep(600 );
         WebElement wb_dropdown_elem_goa = driver.findElement(byLiStateName);
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", wb_dropdown_elem_goa );
+        Utils.getOrCreateUtilsInstance(driver).scrollToElement( wb_dropdown_elem_goa );
         Thread.sleep(400);
         wb_dropdown_elem_goa.click();
 
         driver.findElement(byTextAddress).sendKeys("Siolim Goa");
-        ///for the dropdown:
-        //do smooth scroll also.
 
         /*driver.findElement( By.xpath("//div[@id='BILLING_ADDRESS']//input[@type='checkbox']") ).click();*/
         //getting ( org.openqa.selenium.ElementNotInteractableException: element not interactable )
         driver.findElement( By.xpath("//div[@id='BILLING_ADDRESS']//span[@class='checkboxWpr']") ).click();
-
         driver.findElement(byContioneButton).click();
 
         //confirm selection popup

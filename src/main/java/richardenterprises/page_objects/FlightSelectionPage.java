@@ -1,21 +1,21 @@
 package richardenterprises.page_objects;
 
-import io.cucumber.java.en.Then;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import richardenterprises.recources.Utils;
-
 import java.time.Duration;
-import java.util.Iterator;
 import java.util.List;
 
 public class FlightSelectionPage {
 
+
     public WebDriver driver;
     public WebDriverWait webDriverWaitExplicit;
+
+    public final String fareTypeComfort = "comfort";
 
     public final By byDivCommonOverlay = By.xpath("//div[contains(@class,'commonOverlay')]");
     public final By bySpanOverlayCloseIcon = By.xpath("//div[contains(@class,'commonOverlay')]//span[contains(@class,'overlayCrossIcon')]");
@@ -37,15 +37,8 @@ public class FlightSelectionPage {
 
         webDriverWaitExplicit = new WebDriverWait( this.driver, Duration.ofSeconds(5) );
 
-        final String FareTypeComfort = "comfort";
-
-        //check if add and close it.
-        webDriverWaitExplicit.until(ExpectedConditions.visibilityOfElementLocated( byDivCommonOverlay ));
-        this.driver.findElement( bySpanOverlayCloseIcon ).click();
-        //end - check if add and close it.
+        checkIfAddPresentAndClose();
         Thread.sleep( 1000 );
-
-        //logic here.
 
         //Loop through and Find Listing Cards.
         List<WebElement> list_wb_allFlightCards = this.driver.findElements(byDivListingCards);
@@ -104,6 +97,17 @@ public class FlightSelectionPage {
             }
         */
 
+        }
+
+    }
+
+    private void checkIfAddPresentAndClose() {
+
+        try {
+            webDriverWaitExplicit.until(ExpectedConditions.visibilityOfElementLocated( byDivCommonOverlay ) );
+            this.driver.findElement( bySpanOverlayCloseIcon ).click();
+        } catch ( Exception e ) {
+            System.out.println( "No Add Skipping :" );
         }
 
     }
