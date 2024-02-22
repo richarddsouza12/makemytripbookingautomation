@@ -86,16 +86,16 @@ public class TravellersDetailsPage {
         //Some TransparentOvelralyDiv show up for a while here.wait till it goes.
         WebElement p_overlay = this.driver.findElement(By.cssSelector("p.transparentOverlay"));
         Utils.getOrCreateUtilsInstance( this.driver ).removeWebElementIfPresent( p_overlay );
-
-        driver.findElement( By.xpath("(//div[@id='BILLING_ADDRESS']//input[@type='text'])[2]") ).click();
+        /** section removed*/
+        //driver.findElement( By.xpath("(//div[@id='BILLING_ADDRESS']//input[@type='text'])[2]") ).click();
         Thread.sleep(600 );
         WebElement wb_dropdown_elem_goa = driver.findElement(byLiStateName);
         Utils.getOrCreateUtilsInstance(driver).scrollToElement( wb_dropdown_elem_goa );
         Thread.sleep(400);
         wb_dropdown_elem_goa.click();
 
-        driver.findElement(byTextAddress).sendKeys("Siolim Goa");
-
+        /** section removed*/
+        //driver.findElement(byTextAddress).sendKeys("Siolim Goa");
         /*driver.findElement( By.xpath("//div[@id='BILLING_ADDRESS']//input[@type='checkbox']") ).click();*/
         //getting ( org.openqa.selenium.ElementNotInteractableException: element not interactable )
         driver.findElement( By.xpath("//div[@id='BILLING_ADDRESS']//span[@class='checkboxWpr']") ).click();

@@ -1,6 +1,4 @@
 package richardenterprises.test_components;
-
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -38,7 +36,8 @@ public class BaseTest {
 
         if( browser_name.equals("chrome") ) {
 
-            WebDriverManager.chromedriver().setup();
+            /* not needed since selenium v4 onwards */
+           /* WebDriverManager.chromedriver().setup();*/
 
             if( boolIsHeadlessMode ) {
 
@@ -58,7 +57,9 @@ public class BaseTest {
 
         }
         else if ( browser_name.equals("firefox") ) {
-            WebDriverManager.firefoxdriver().setup();
+
+            /* not needed since selenium v4 onwards */
+            /* WebDriverManager.chromedriver().setup();*/
             this.driver = new FirefoxDriver();
         }
 
