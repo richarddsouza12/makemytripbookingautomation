@@ -17,7 +17,7 @@ TestNg Reports produced in folder
 
 **Cucumber-TestNg Runner Framework Commands**
 ```sh
-mvn test
+ mvn test -Dtest=TestNgTestRunner
 ```
 Cucuumber Frameowrk Reports produced in folder
 - cucumber_reports / default_cucumber_report
